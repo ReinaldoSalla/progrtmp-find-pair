@@ -9,21 +9,28 @@
  */
 
 function findPairEqualToSum(arr: Array<number>, sum: number): Array<number> {
-  // Solution with loop
-  let pair: Array<number> = [];
-  for (let i = 0; i < arr.length - 1; i++) {
-    for (let j = i + 1; j < arr.length; j++) {
-      if (arr[i] + arr[j] === sum) {
-        pair = [arr[i], arr[j]];
-      }
-    }
-  } 
-  return pair;
+  // Solution with loop (quadratic)
+  // let pair: Array<number> = [];
+  // for (let i = 0; i < arr.length - 1; i++) {
+  //   for (let j = i + 1; j < arr.length; j++) {
+  //     if (arr[i] + arr[j] === sum) {
+  //       pair = [arr[i], arr[j]];
+  //     }
+  //   }
+  // } 
+  // return pair;
 
-  // Solution with array iteraction
+  // Solution with array iteraction (quadratic)
+  const pair = arr.find((number, index, array) => {
+    // const slicedArr = arr.slice
+  })
+  // Binary Search (logN)
+
+  // Shift (Linear)
+
+  return [0];
 }
 
-const sequence = [1, 2, 3];
-const sum = 5;
-const pair = findPairEqualToSum(sequence, sum);
-console.log(pair);
+const sequence = [1, 2, 4, 4];
+const sum = 8;
+console.log(findPairEqualToSum(sequence, sum));
