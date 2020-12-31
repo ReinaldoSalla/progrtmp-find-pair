@@ -1,6 +1,6 @@
 /**
- * Given an artibrary collection of numbers, find the matching pair 
- * that it's equal to an artitrary sum
+ * Find a pair within a collection of numbers that is equal to the sum
+ * of this pair
  * 
  * @example
  * const pair = findPairEqualToSum([1, 2, 3], 5); // pair = [2, 3]
@@ -8,7 +8,10 @@
  * source: https://www.youtube.com/watch?v=XKu_SEDAykw
  */
 
-function findPairEqualToSum(arr: Array<number>, sum: number): Array<number> {
+function findPair(
+  arr: Array<number>, 
+  sum: number
+): null | Array<number> {
   // Solution with loop (quadratic)
   // let pair: Array<number> = [];
   // for (let i = 0; i < arr.length - 1; i++) {
@@ -21,16 +24,37 @@ function findPairEqualToSum(arr: Array<number>, sum: number): Array<number> {
   // return pair;
 
   // Solution with array iteraction (quadratic)
-  const pair = arr.find((number, index, array) => {
-    // const slicedArr = arr.slice
-  })
+  // const pair = arr.find((number, index, array) => {
+  //   // const slicedArr = arr.slice
+  // })
+
   // Binary Search (logN)
 
-  // Shift (Linear)
-
-  return [0];
+  // Shift (Linear) solution in the video
+  let low = 0;
+  const high = arr.length - 1;
+  while (low < high) {
+    console.log(`iteration ${low+1}: arr[low]=${arr[low]} arr[high]=${arr[high]}`)
+    if (arr[low] + arr[high] === sum) {
+      return [arr[low], arr[high]];
+    }
+    low++; 
+  }
+  return null;
 }
 
-const sequence = [1, 2, 4, 4];
+const sortedSequence = [1, 2, 4, 4];
+const unsortedSequence = [4, 4, 2, 1];
+
+const invalidSortedSequence = [1, 2, 3, 4];
+const unsortedInvalidSequence = [4, 3, 2, 1];
+
 const sum = 8;
-console.log(findPairEqualToSum(sequence, sum));
+
+console.log(findPair(sortedSequence, sum));
+// console.log(findPair(invalidSortedSequence, sum));
+console.log(findPair(unsortedSequence, sum));
+// console.log(findPair(unsortedInvalidSequence, sum));
+
+
+console.log('\n\n\n Finished');
