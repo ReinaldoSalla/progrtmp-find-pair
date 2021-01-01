@@ -11,7 +11,7 @@
 function findPair(
   arr: Array<number>, 
   sum: number
-): null | Array<number> {
+): null | boolean | Array<number> {
   // Solution with loop (quadratic)
   // let pair: Array<number> = [];
   // for (let i = 0; i < arr.length - 1; i++) {
@@ -30,16 +30,26 @@ function findPair(
 
   // Binary Search (logN)
 
-  // Shift (Linear) solution in the video
-  let low = 0;
-  const high = arr.length - 1;
-  while (low < high) {
-    console.log(`iteration ${low+1}: arr[low]=${arr[low]} arr[high]=${arr[high]}`)
-    if (arr[low] + arr[high] === sum) {
-      return [arr[low], arr[high]];
-    }
-    low++; 
-  }
+  // Shift (Linear)
+  // let low = 0;
+  // const high = arr.length - 1;
+  // while (low < high) {
+  //   console.log(`iteration ${low+1}: arr[low]=${arr[low]} arr[high]=${arr[high]}`)
+  //   if (arr[low] + arr[high] === sum) {
+  //     return [arr[low], arr[high]];
+  //   }
+  //   low++; 
+  // }
+
+  // complement (liiner)
+  // const comp: Array<number> = [];
+  // for (const item of arr) {
+  //   const compItem = comp.find((compItem) => compItem === item);
+  //   if (compItem !== comp[comp.length - 1]) {
+  //     return true;
+  //   }
+  //   comp.push(sum-item);
+  // }
   return null;
 }
 
@@ -52,9 +62,8 @@ const unsortedInvalidSequence = [4, 3, 2, 1];
 const sum = 8;
 
 console.log(findPair(sortedSequence, sum));
-// console.log(findPair(invalidSortedSequence, sum));
-console.log(findPair(unsortedSequence, sum));
-// console.log(findPair(unsortedInvalidSequence, sum));
-
+console.log(findPair(invalidSortedSequence, sum));
+// console.log(findPair(unsortedSequence, sum));
+console.log(findPair(unsortedInvalidSequence, sum));
 
 console.log('\n\n\n Finished');
