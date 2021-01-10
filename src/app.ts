@@ -1,6 +1,5 @@
 /**
- * Find a pair within a collection of numbers that is equal to the sum
- * of this pair
+ * Find a pair of items inside an array whose sum equals a target number
  * 
  * @example
  * const pair = findPairEqualToSum([1, 2, 3], 5); // pair = [2, 3]
@@ -12,7 +11,7 @@ function findPair(
   arr: Array<number>, 
   sum: number
 ): null | boolean | Array<number> {
-  // Solution with loop (quadratic)
+  // Solution with two loop (quadratic)
   // let pair: Array<number> = [];
   // for (let i = 0; i < arr.length - 1; i++) {
   //   for (let j = i + 1; j < arr.length; j++) {
@@ -23,7 +22,7 @@ function findPair(
   // } 
   // return pair;
 
-  // Solution with array iteraction (quadratic)
+  // Solution with array iteraction .find
   // const pair = arr.find((number, index, array) => {
   //   // const slicedArr = arr.slice
   // })
@@ -42,28 +41,23 @@ function findPair(
   // }
 
   // complement (liiner)
-  // const comp: Array<number> = [];
-  // for (const item of arr) {
-  //   const compItem = comp.find((compItem) => compItem === item);
-  //   if (compItem !== comp[comp.length - 1]) {
-  //     return true;
+  // const comp = [sum-arr[0]];
+  // for (const item of arr.slice(1)) {
+  //   console.log(`arrItem = ${item}, compArr = ${comp}`);
+  //   const found = comp.find((compItem) => compItem === item);
+  //   if (found) {
+  //     return [item, found];
   //   }
   //   comp.push(sum-item);
   // }
-  return null;
+  return false;
 }
 
-const sortedSequence = [1, 2, 4, 4];
-const unsortedSequence = [4, 4, 2, 1];
-
-const invalidSortedSequence = [1, 2, 3, 4];
-const unsortedInvalidSequence = [4, 3, 2, 1];
-
+const sequence = [1, 4, 4, 1];
 const sum = 8;
 
-console.log(findPair(sortedSequence, sum));
-console.log(findPair(invalidSortedSequence, sum));
-// console.log(findPair(unsortedSequence, sum));
-console.log(findPair(unsortedInvalidSequence, sum));
+const yes = findPair(sequence, sum);
+
+console.log(yes);
 
 console.log('\n\n\n Finished');
