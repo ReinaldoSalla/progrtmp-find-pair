@@ -5,6 +5,9 @@
  * const pair = findPairEqualToSum([1, 2, 3], 5); // pair = [2, 3]
  * 
  * source: https://www.youtube.com/watch?v=XKu_SEDAykw
+ * 
+ * links
+ * https://stackoverflow.com/questions/55363509/does-this-javascript-function-have-a-linear-or-quadratic-time-complexity
  */
 
 function findPair(
@@ -21,11 +24,6 @@ function findPair(
   //   }
   // } 
   // return pair;
-
-  // Solution with array iteraction .find
-  // const pair = arr.find((number, index, array) => {
-  //   // const slicedArr = arr.slice
-  // })
 
   // Binary Search (logN)
 
@@ -50,11 +48,19 @@ function findPair(
   //   }
   //   comp.push(sum-item);
   // }
-  return false;
+
+  // my solution, for of + find (quadratic)
+  for (const [index, item] of arr.slice(0, arr.length-1).entries()) {
+    const found = arr.slice(index + 1).find((arrItem) => arrItem === sum - item);
+    if (found) {
+      return [item, found];
+    }
+  }
+  return null;
 }
 
-const sequence = [1, 4, 4, 1];
-const sum = 8;
+const sequence = [1, 6, 4, 2];
+const sum = 10;
 
 const yes = findPair(sequence, sum);
 
