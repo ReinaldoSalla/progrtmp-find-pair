@@ -50,16 +50,29 @@ function findPair(
   // }
 
   // my solution, for of + find (quadratic)
-  for (const [index, item] of arr.slice(0, arr.length-1).entries()) {
-    const found = arr.slice(index + 1).find((arrItem) => arrItem === sum - item);
-    if (found) {
-      return [item, found];
-    }
-  }
-  return null;
+  // for (const [index, item] of arr.slice(0, arr.length-1).entries()) {
+  //   const found = arr.slice(index + 1).find((arrItem) => arrItem === sum - item);
+  //   if (found) {
+  //     return [item, found];
+  //   }
+  // }
+
+  // for + set = O(n) + 0(1), linear
+  // const set = new Set([arr[0]]);
+  // for (const item of arr.slice(1)) {
+  //   if (set.has(item)) {
+  //     return true;
+  //   }
+  //   set.add(sum-item);
+  // }
+  const set = new Set([arr[0]]);
+  return arr.slice(1).some((item) => {
+    set.add(sum-item);
+    return set.has(item); // 12m50s
+  })    
 }
 
-const sequence = [1, 6, 4, 2];
+const sequence = [1, 6, 4, 4];
 const sum = 10;
 
 const yes = findPair(sequence, sum);
