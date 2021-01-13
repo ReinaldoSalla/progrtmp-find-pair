@@ -8,6 +8,7 @@
  * 
  * links
  * https://stackoverflow.com/questions/55363509/does-this-javascript-function-have-a-linear-or-quadratic-time-complexity
+ * https://stackoverflow.com/questions/55057200/is-the-set-has-method-o1-and-array-indexof-on
  */
 
 function findPair(
@@ -51,11 +52,13 @@ function findPair(
 
   // my solution, for of + find (quadratic)
   // for (const [index, item] of arr.slice(0, arr.length-1).entries()) {
+  //   // console.log(`iterating item ${item}`);
   //   const found = arr.slice(index + 1).find((arrItem) => arrItem === sum - item);
   //   if (found) {
   //     return [item, found];
   //   }
   // }
+  // return null;
 
   // for + set = O(n) + 0(1), linear
   // const set = new Set([arr[0]]);
@@ -65,17 +68,49 @@ function findPair(
   //   }
   //   set.add(sum-item);
   // }
-  const set = new Set([arr[0]]);
-  return arr.slice(1).some((item) => {
-    set.add(sum-item);
-    return set.has(item); // 12m50s
-  })    
+
+  // const complements = new Set([sum-arr[0]]);
+  // return arr.slice(1).some((item) => {
+  //   console.log(`iterating item ${item}`);
+  //   if (complements.has(item)) {
+  //     return true;
+  //   }
+  //   complements.add(sum-item);
+  // })    
+
+  // const complements = new Set([sum-arr[0]]);
+  // return arr.slice(1).some((item) => {
+  //   console.log(`iterating item ${item}`);
+  //   return complements.has(item) || !complements.add(sum-item);
+  // })    
+
+  // const complements = new Set([sum-arr[0]]);
+  // return arr.slice(1).some((item) => (
+  //   complements.has(item) || !complements.add(sum-item)
+  // ));
+
+  const complements = new Set([sum-arr[0]]);
+  const found = arr.slice(1).find((item) => {
+    // console.log(`iterating item ${item}`);
+    if (complements.has(item)) {
+      return true;
+    }
+    complements.add(sum-item);
+  });
+  return found ? [found, sum-found] : null; 
 }
 
-const sequence = [1, 6, 4, 4];
-const sum = 10;
+// const sequence = [1, 2, 4, 2, 6];
+// const sum = 6;
 
+const sequence = Array(1e3).fill(0).map((_, index) => index);
+const penultimateIndex = sequence.length-2;
+const lastIndex = sequence.length-1;
+const sum = sequence[penultimateIndex] + sequence[lastIndex];
+
+console.time('id');
 const yes = findPair(sequence, sum);
+console.timeEnd('id');
 
 console.log(yes);
 
