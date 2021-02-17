@@ -1,38 +1,77 @@
 interface PairInfo {
-  firstItem: number;
-  firstItemIndex: number;
-  secondItem: number;
-  secondItemIndex: number;
+  firstNumber?: number;
+  firstNumberIndex?: number;
+  secondNumber?: number;
+  secondNumberIndex?: number;
 }
 
+// using for loop
 function findPair(numbers: Array<number>, sum: number) {
-  const lookup = new Set(numbers);
-  const found = numbers.find((item) => lookup.has(sum-item));
-  if (!found) {
+  const lookup = new Set();
+  let secondNumber;
+  for (let i = 0; i < numbers.length; i++) {
+    if (lookup.has(sum - numbers[i])) {
+      secondNumber = numbers[i];
+    }
+    lookup.add(numbers[i])
+  }
+  if (!secondNumber) {
     return null;
   }
-  const firstItem = found;
-  const secondItem = sum - found;
-  const result = numbers.reduce((acc, curr, index) => {
-    const hasFoundedFirstItem = 'firstItem' in acc;
-    const hasFoundedSecondItem = 'secondItem' in acc;
-    if (curr === firstItem && !hasFoundedFirstItem) {
-      acc.firstItem = firstItem,
-      acc.firstItemIndex = index;
-    } else if (curr === secondItem && !hasFoundedSecondItem) {
-      acc.secondItem = secondItem;
-      acc.secondItemIndex = index;
+  const firstNumber = sum - secondNumber;
+  const pairInfo: PairInfo = {};
+  for (let i = 0; i < numbers.length; i++) {
+    if (numbers[i] === firstNumber && !('firstNumber' in pairInfo)) {
+      pairInfo.firstNumber = numbers[i];
+      pairInfo.firstNumberIndex = i;
+    } else if (numbers[i] === secondNumber && !('secondNumber' in pairInfo)) {
+      pairInfo.secondNumber = numbers[i];
+      pairInfo.secondNumberIndex = i;
     }
-    return acc;
-  }, {} as PairInfo);
-  return result;
+    if ('firstNumber' in pairInfo && 'secondNumber' in pairInfo) {
+      return pairInfo;
+    }
+  }
 }
+
+// using array iteration
+// function findPair(numbers: Array<number>, sum: number) {
+//   const lookup = new Set();
+//   const found = numbers.find((item) => {
+//     if (lookup.has(sum - item)) {
+//       return true;
+//     }
+//     lookup.add(item)
+//   });
+//   if (!found) {
+//     return null;
+//   }
+//   const secondNumber = found;
+//   const firstNumber = sum - found;
+//   const pairInfo = numbers.reduce((acc: PairInfo, curr, index) => {
+//     if (curr === firstNumber && !('firstNumber' in acc)) {
+//       acc.firstNumber = curr;
+//       acc.firstNumberIndex = index;
+//     } else if (curr === secondNumber && !('secondNumber' in acc)) {
+//       acc.secondNumber = curr;
+//       acc.secondNumberIndex = index;
+//     }
+//     return acc;
+//   }, {});
+//   return pairInfo;
+// }
 
 // const numbers = [0, 1, 2, 3];
 // const sum = 5;
 
 const numbers = [0, 5, 5, 4, 4, 1, 1, 1, 10];
 const sum = 2;
+
+// const numbers = [0, 5, 5, 4, 4, 1, 1, 2, 10];
+// const sum = 4;
+
+// const numbers = [1, 1];
+// const sum = 100;
 
 // const numbers = Array(1e3).fill(0).map((_, index) => index);
 // const penultimateIndex = numbers.length-2;
