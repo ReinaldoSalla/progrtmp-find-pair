@@ -5,6 +5,7 @@ interface PairInfo {
   secondNumberIndex?: number;
 }
 
+// using for loops
 // function findPair(numbers: Array<number>, sum: number) {
 //   const lookup = new Set();
 //   let secondNumber;
@@ -34,6 +35,7 @@ interface PairInfo {
 //   }
 // }
 
+// using Array.find and Array.reduce
 function findPair(numbers: Array<number>, sum: number) {
   const lookup = new Set();
   const found = numbers.find((item) => {
@@ -58,29 +60,14 @@ function findPair(numbers: Array<number>, sum: number) {
     return acc;
   }, {});
   return pairInfo;
+  
 }
-
-// const numbers = [0, 1, 2, 3];
-// const sum = 5;
 
 const numbers = [0, 5, 5, 4, 4, 1, 1, 1, 10];
 const sum = 2;
 
-// const numbers = [0, 5, 5, 4, 4, 1, 1, 2, 10];
-// const sum = 4;
-
-// const numbers = [1, 1];
-// const sum = 100;
-
-// const numbers = Array(10e6).fill(0).map((_, index) => index);
-// const penultimateIndex = numbers.length-2;
-// const lastIndex = numbers.length-1;
-// const sum = numbers[penultimateIndex] + numbers[lastIndex];
-
-// console.time('findPair');
 const result = findPair(numbers, sum);
-// console.timeEnd('findPair');
 
-console.log(result);
+// console.log(result);
 
 export default findPair;
