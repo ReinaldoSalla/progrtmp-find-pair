@@ -2,9 +2,9 @@ import findPair from './app';
 
 describe('findPair', () => {
   // arrange global
-  const numbers = Array(1e4).fill(0).map((_, index) => index);
+  const numbers = Array(1000).fill(0).map((_, index) => index);
 
-  it('Should return the pair information if the sequence has a pair equal to a target sum', () => {
+  it('Should return the pair information if the sequence has a pair equal to the target sum', () => {
     //arrange
     const penultimateIndex = numbers.length-2;
     const lastIndex = numbers.length-1;
@@ -23,7 +23,7 @@ describe('findPair', () => {
     expect(result).toStrictEqual(mockedResult);
   });
 
-  it('Should return null is the sequence does not have a pair equal to a target sum', () => {
+  it('Should return null is the sequence does not have a pair equal to the target sum', () => {
     // arrange
     const sum = 0;
     const mockResult = null;
